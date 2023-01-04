@@ -42,13 +42,13 @@ const Login = (props) => {
   isValid: null,
 });
 
-console.log(passwordState)
+//console.log(passwordState)
 
   // const [enteredEmail, setEnteredEmail] = useState("");
   // const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
-  const [formIsValid, setFormIsValid] = useState(false);
+  // const [enteredPassword, setEnteredPassword] = useState("");
+  // const [passwordIsValid, setPasswordIsValid] = useState();
+  const [formIsValid, setFormIsValid] = useState();
 
   //useEffect run after component has run, useEffect run at last
   // useEffect(()=>{
@@ -63,34 +63,36 @@ console.log(passwordState)
   //   };
   // }, []);
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log("checking form validity");
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("checking form validity");
 
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+      setFormIsValid(
+        emailState.isValid && passwordState.isValid
+      );
+    }, 500);
 
-  //   //should return as function.
-  //   //after dependency change . this function will read first before useEsffect
-  //   return () => {
-  //     console.log("CLEAN UP");
-  //     clearTimeout(identifier);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+    //should return as function.
+    //after dependency change . this function will read first before useEsffect
+    return () => {
+      console.log("CLEAN UP");
+      clearTimeout(identifier);
+    };
+  }, [emailState, passwordState ]);
   //console.log(enteredEmail)
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.value.trim().length > 6);
+    //setFormIsValid(event.target.value.includes('@') && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
-    dispatchPassword({ type: "USER_INPUT", val: event.target.value })
+    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
     //setEnteredPassword(event.target.value);
-    setFormIsValid(emailState.isValid && passwordState.value.trim().length > 6);
+    //console.log(passwordState.isValid)
+    //setFormIsValid(emailState.isValid && event.target.value.trim().length >6);
+   // console.log(formIsValid)
   };
 
   const validateEmailHandler = () => {
