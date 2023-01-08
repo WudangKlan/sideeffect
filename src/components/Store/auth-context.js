@@ -16,7 +16,7 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  const logOutHandler = () => {
+  const logOutHandler =  () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
